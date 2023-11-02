@@ -35,3 +35,8 @@ pids
 
 # App data
 .docker
+
+# env files
+.env
+.env.development
+.env.production
