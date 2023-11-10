@@ -137,7 +137,7 @@ module.exports = {
         'no-useless-constructor': 'off',
         'class-methods-use-this': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/explicit-function-return-type': 'error',
+        '@typescript-eslint/explicit-function-return-type': 'off',
         'unicorn/no-new-array': 'off',
         'unicorn/no-fn-reference-in-iterator': 'off',
         'unicorn/no-array-for-each': 'off',
@@ -176,6 +176,7 @@ module.exports = {
         'simple-import-sort/exports': 'error',
         'import/prefer-default-export': 'off',
         'import/no-default-export': 'off',
+        'import/no-extraneous-dependencies': 'off',
         'import/first': 'error',
         'import/newline-after-import': 'error',
         'import/no-duplicates': 'error',
@@ -213,6 +214,17 @@ module.exports = {
         ],
         // This is disabled because of this issue: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/52595
         'unicorn/prefer-node-protocol': 'error',
+        'unicorn/prefer-top-level-await': 'off',
+        // rules for file names, only camelCase and kebabCase are allowed
+        "unicorn/filename-case": [
+          "error",
+          {
+            "cases": {
+              "camelCase": true,
+              "kebabCase": true
+            }
+          }
+        ],
         'deprecation/deprecation': 'warn',
         // Disallow unsupported ECMAScript syntax on the specified version
         // Ignore ES6 modules because people might be using babel
@@ -222,7 +234,7 @@ module.exports = {
         'n/no-process-exit': 'off',
         'promise/no-callback-in-promise': 'off',
         '@typescript-eslint/explicit-member-accessibility': [
-          'error',
+          'warn',
           {
             accessibility: 'explicit',
             overrides: {
@@ -244,12 +256,6 @@ module.exports = {
         ]
       },
       overrides: [
-        {
-          files: ['src/!(presentation|types)/**/*.ts'],
-          rules: {
-            'hexagonal-architecture/enforce': ['error']
-          }
-        },
         {
           files: ['**/*.unit.ts', '**/*.int.ts', '**/*.e2e.ts', '**/*.spec.ts', '**/*.test.ts'],
           env: {

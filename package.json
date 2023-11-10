@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "📖 Template to start developing a REST API with Node.js (Express), TypeScript, ESLint, Prettier, Husky, Prisma, etc.",
   "main": "dist/index.js",
+  "license": "ISC",
   "keywords": [
     "node",
     "typescript",
@@ -15,6 +16,12 @@
   "author": {
     "name": "Denys"
   },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "check:lint": "eslint . --color",
     "check:staged": "lint-staged",
@@ -23,9 +30,19 @@
     "check:format": "prettier --check .",
     "fix:format": "prettier --check --write --ignore-unknown .",
     "fix:lint": "npm run check:lint -- --fix",
-    "prepare": "cross-env is-ci || husky install"
+    "prepare": "husky install",
+    "dev": "nest start -- -b swc --watch",
+    "debug": "nest start --debug --watch",
+    "prod": "node dist/main",
+    "build": "nest build"
   },
-  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^10.2.8",
+    "@nestjs/core": "^10.2.8",
+    "@nestjs/platform-express": "^10.2.8",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
@@ -39,6 +56,13 @@
     "@cspell/dict-npm": "^5.0.12",
     "@cspell/dict-software-terms": "^3.3.9",
     "@cspell/dict-typescript": "^3.1.2",
+    "@nestjs/cli": "^10.2.1",
+    "@nestjs/schematics": "^10.0.3",
+    "@nestjs/testing": "^10.2.8",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20.9.0",
+    "@types/supertest": "^2.0.16",
     "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^6.9.1",
     "cross-env": "^7.0.3",
@@ -70,14 +94,21 @@
     "eslint-plugin-yml": "^1.10.0",
     "get-tsconfig": "^4.7.2",
     "husky": "^8.0.3",
+    "jest": "^29.7.0",
     "lint-staged": "^15.0.2",
     "markdownlint": "^0.31.1",
     "markdownlint-cli": "^0.37.0",
-    "nodemon": "^3.0.1",
     "npm-package-json-lint-config-default": "^6.0.0",
     "prettier": "^3.0.3",
     "prettier-plugin-packagejson": "^2.4.6",
     "prettier-plugin-prisma": "^5.0.0",
+    "source-map-support": "^0.5.21",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
+    "ts-loader": "^9.5.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2",
     "yaml-eslint-parser": "^1.2.2"
   }
