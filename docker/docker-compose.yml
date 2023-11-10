@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - TZ=${TZ}
+    volumes:
+      - ${DB_VOLUME}:/var/lib/postgresql/data
+    ports:
+      - ${DB_PORT}:5432
+
+  db-pgweb:
+    image: sosedoff/pgweb
+    container_name: db-pgweb
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - PGWEB_DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable
+      - TZ=${TZ}
+    ports:
+      - ${DB_MANAGER_PORT}:8081
