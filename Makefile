@@ -1,6 +1,9 @@
 ## Root directory
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
+## Include env file
+-include .env
+
 ## Set 'bash' as default shell
 SHELL := $(shell which bash)
 
@@ -57,6 +60,11 @@ db-up: ## Start database container
 	@echo "▶️ Starting database (Docker)..."
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) --env-file .env up -d db db-pgweb
 
+.PHONY: db-connect
+db-connect: ## Connect to the database
+	@echo "▶️ Connecting..."
+	docker exec -it db psql --port=${DB_PORT} --username=${DB_USER} --password --dbname=${DB_NAME}
+
 .PHONY: db-down
 db-down: ## Stop database container
 	@echo "🛑 Stopping database (Docker)..."
@@ -70,3 +78,4 @@ clean: ## Clean all container resources
 .PHONY: logs
 logs: ## Show logs for all or c=<name> containers
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) --env-file .env logs --tail=100 -f $(c)
+
