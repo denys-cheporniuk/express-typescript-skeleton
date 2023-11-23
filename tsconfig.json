@@ -32,7 +32,7 @@
     "emitDecoratorMetadata": true, // Enables experimental support for emitting type metadata for decorators which works with the module
 
     // Strict checks
-    "strict": true, // Enable all strict type-checking options
+    "strict": false, // Enable all strict type-checking options
     // "allowUnreachableCode": false, // Pick up dead code paths
     // "alwaysStrict": true, // Parse in strict mode and emit "use strict" for each source file
     // "noImplicitAny": true, // Raise error on expressions and declarations with an implied 'any' type

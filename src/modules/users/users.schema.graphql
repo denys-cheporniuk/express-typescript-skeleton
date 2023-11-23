@@ -1,7 +1,3 @@
-type Query {
-  getUserById(id: Int!): User!
-}
-
 type User {
   id: Int!
   createdAt: String!
@@ -10,4 +6,8 @@ type User {
   email: String!
   firstName: String
   lastName: String
+}
+
+type Query {
+  userById(id: Int!): User!
 }
