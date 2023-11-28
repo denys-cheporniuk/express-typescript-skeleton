@@ -1,14 +1,11 @@
 const { pathsToModuleNameMapper } = require('ts-jest');
-const { compilerOptions } = require('get-tsconfig').getTsconfig('./tsconfig.json')['config'];
+const { compilerOptions } =
+  require('get-tsconfig').getTsconfig('./tsconfig.json')['config'];
 
 module.exports = {
   /* Basic settings */
-  "moduleFileExtensions": [
-    "js",
-    "json",
-    "ts"
-  ],
-  "testRegex": ".*\\.spec\\.ts$",
+  moduleFileExtensions: ['js', 'json', 'ts'],
+  testRegex: '.*\\.spec\\.ts$',
   // Enable verbosity
   verbose: true,
   // The root directory that Jest should scan for tests and modules within
@@ -29,7 +26,9 @@ module.exports = {
     ]
   },
   // Resolve 'paths' from tsconfig.json
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>' }),
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>'
+  }),
   // Ignore paths and modules
   modulePathIgnorePatterns: ['<rootDir>/dist'],
 
@@ -44,7 +43,7 @@ module.exports = {
   /* Coverage settings */
   collectCoverage: false,
   // The directory where Jest should output its coverage files
-  "coverageDirectory": "coverage",
+  coverageDirectory: 'coverage',
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   coveragePathIgnorePatterns: [

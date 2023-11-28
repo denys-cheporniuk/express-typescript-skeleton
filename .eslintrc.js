@@ -25,9 +25,12 @@ const importGroups = [
  * the different namespaces defined in the application.
  * This matches the "paths" property of the tsconfig.json file.
  */
-const { compilerOptions } = require('get-tsconfig').getTsconfig('./tsconfig.json')['config'];
+const { compilerOptions } =
+  require('get-tsconfig').getTsconfig('./tsconfig.json')['config'];
 if ('paths' in compilerOptions) {
-  const namespaces = Object.keys(compilerOptions.paths).map(path => path.replace('/*', ''));
+  const namespaces = Object.keys(compilerOptions.paths).map(path =>
+    path.replace('/*', '')
+  );
   if (namespaces && namespaces.length > 0) {
     // Anything that is defined in tsconfig.json with a little trick in order to resolve paths
     const pathAliasRegex = [`^(${namespaces.join('|')})(/.*|$)`];
@@ -166,7 +169,8 @@ module.exports = {
             patterns: [
               {
                 group: ['../*'],
-                message: 'For imports of parent elements use better path aliases. For example, @domain/shared.'
+                message:
+                  'For imports of parent elements use better path aliases. For example, @domain/shared.'
               }
             ]
           }
@@ -202,10 +206,17 @@ module.exports = {
         'unused-imports/no-unused-imports': 'error',
         'unused-imports/no-unused-vars': [
           'error',
-          { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }
+          {
+            vars: 'all',
+            varsIgnorePattern: '^_',
+            args: 'after-used',
+            argsIgnorePattern: '^_'
+          }
         ],
 
         /* General rules */
+        'max-len': [2, { code: 80, ignorePattern: '^import\\W.*' }],
+
         'unicorn/prevent-abbreviations': [
           'warn',
           {
@@ -216,56 +227,53 @@ module.exports = {
         'unicorn/prefer-node-protocol': 'error',
         'unicorn/prefer-top-level-await': 'off',
         // rules for file names, only camelCase and kebabCase are allowed
-        "unicorn/filename-case": [
-          "error",
+        'unicorn/filename-case': [
+          'error',
           {
-            "cases": {
-              "camelCase": true,
-              "kebabCase": true
+            cases: {
+              camelCase: true,
+              kebabCase: true
             }
           }
         ],
         'deprecation/deprecation': 'warn',
         // Disallow unsupported ECMAScript syntax on the specified version
         // Ignore ES6 modules because people might be using babel
-        'n/no-unsupported-features/es-syntax': ['error', { ignores: ['modules'] }],
+        'n/no-unsupported-features/es-syntax': [
+          'error',
+          { ignores: ['modules'] }
+        ],
         // node plugin cannot resolve TypeScript's path aliases. See https://github.com/mysticatea/eslint-plugin-node/issues/233
         'n/no-missing-import': 'off',
         'n/no-process-exit': 'off',
         'promise/no-callback-in-promise': 'off',
-        '@typescript-eslint/explicit-member-accessibility': [
-          'warn',
-          {
-            accessibility: 'explicit',
-            overrides: {
-              accessors: 'explicit',
-              constructors: 'no-public',
-              methods: 'explicit',
-              properties: 'off',
-              parameterProperties: 'explicit'
-            }
-          }
-        ],
-        'prefer-arrow/prefer-arrow-functions': [
-          'warn',
-          {
-            disallowPrototype: true,
-            singleReturnOnly: false,
-            classPropertiesAllowed: false
-          }
-        ]
+        '@typescript-eslint/explicit-member-accessibility': 'off',
+        'prefer-arrow/prefer-arrow-functions': 'off'
       },
       overrides: [
         {
-          files: ['**/*.unit.ts', '**/*.int.ts', '**/*.e2e.ts', '**/*.spec.ts', '**/*.test.ts'],
+          files: [
+            '**/*.unit.ts',
+            '**/*.int.ts',
+            '**/*.e2e.ts',
+            '**/*.spec.ts',
+            '**/*.test.ts'
+          ],
           env: {
             jest: true,
             'jest/globals': true
           },
-          extends: ['plugin:jest/recommended', 'plugin:jest/style', 'plugin:jest-extended/all'],
+          extends: [
+            'plugin:jest/recommended',
+            'plugin:jest/style',
+            'plugin:jest-extended/all'
+          ],
           plugins: ['jest', 'jest-extended'],
           rules: {
-            'jest/expect-expect': ['error', { assertFunctionNames: ['expect', 'request.**.expect'] }]
+            'jest/expect-expect': [
+              'error',
+              { assertFunctionNames: ['expect', 'request.**.expect'] }
+            ]
           }
         }
       ]
