@@ -1,9 +1,13 @@
-import { IsOptional } from 'class-validator';
+import { IsOptional, MinLength } from 'class-validator';
 
-export class CreateUserInput {
+import { UpdateUserInput } from '@/graphql-types';
+
+export class UpdateUserInputData extends UpdateUserInput {
   @IsOptional()
+  @MinLength(3)
   firstName: string;
 
   @IsOptional()
+  @MinLength(3)
   lastName: string;
 }

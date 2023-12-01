@@ -1,13 +1,30 @@
+scalar Date
+
 type User {
-  id: Int!
-  createdAt: String!
-  updatedAt: String!
+  id: ID!
+  createdAt: Date!
 
   email: String!
   firstName: String
   lastName: String
 }
 
+input CreateUserInput {
+  email: String!
+  firstName: String
+  lastName: String
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+}
+
 type Query {
-  userById(id: Int!): User!
+  userById(id: ID!): User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(id: ID!, updateUserInput: UpdateUserInput!): User!
 }

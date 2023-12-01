@@ -154,6 +154,8 @@ module.exports = {
         'unicorn/no-process-exit': 'off',
         'unicorn/prefer-module': 'off',
         'security/detect-object-injection': 'off',
+        'unicorn/no-abusive-eslint-disable': 'off',
+        'eslint-comments/no-unlimited-disable': 'off',
 
         // Import and order style
         'import/order': 'off',
@@ -215,8 +217,6 @@ module.exports = {
         ],
 
         /* General rules */
-        'max-len': [2, { code: 80, ignorePattern: '^import\\W.*' }],
-
         'unicorn/prevent-abbreviations': [
           'warn',
           {
