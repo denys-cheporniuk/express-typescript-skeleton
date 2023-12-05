@@ -4,6 +4,9 @@ ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 ## Include env file
 -include .env
 
+TAG ?= latest
+APP_ENV ?= local
+
 ## Set 'bash' as default shell
 SHELL := $(shell which bash)
 
@@ -68,7 +71,7 @@ db-connect: ## Connect to the database
 .PHONY: db-down
 db-down: ## Stop database container
 	@echo "🛑 Stopping database (Docker)..."
-	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) --env-file .env stop db db-pgweb
+	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) --env-file .env down
 
 .PHONY: clean
 clean: ## Clean all container resources
@@ -79,3 +82,7 @@ clean: ## Clean all container resources
 logs: ## Show logs for all or c=<name> containers
 	@$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) --env-file .env logs --tail=100 -f $(c)
 
+.PHONY: api
+api: ## run api in local mode
+	@echo "▶️ Starting api (Docker)..."
+	TAG=$(TAG) APP_ENV=$(APP_ENV) $(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) --env-file .env up

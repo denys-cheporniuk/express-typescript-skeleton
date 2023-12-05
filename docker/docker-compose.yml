@@ -26,3 +26,23 @@ services:
       - TZ=${TZ}
     ports:
       - ${DB_MANAGER_PORT}:8081
+
+  api:
+    container_name: website-api
+    restart: always
+    build:
+      context: ..
+      args:
+        - PORT=${PORT}
+        - APP_ENV=${APP_ENV}
+    image: ${IMAGE_NAME}/dev:${TAG}
+    command: >
+      bash -c "npm run prisma:migrate
+      && npm run prisma:seed
+      && npm run dev"
+    depends_on:
+      - db
+    volumes:
+      - ${LOGS_VOLUME}:/app/logs
+    ports:
+      - ${EXTERNAL_PORT}:${PORT}
